@@ -7,7 +7,7 @@ env:
   IMAGE_NAME: ruby_on_rails
 
 jobs:
-  push:
+  build:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -29,3 +29,20 @@ jobs:
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           docker tag $IMAGE_NAME $IMAGE_ID:latest
           docker push $IMAGE_ID:latest
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .env file for test environment
+        run: |
+          cp .env.example .env
+          cp .env.db.example .env.db
+      - name: Run tests
+        run: docker-compose run backend rails test
