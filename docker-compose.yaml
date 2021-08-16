@@ -3,10 +3,8 @@ services:
 
  postgres:
      image: postgres:12.1
-     environment:
-       POSTGRES_DB: drkiq_development
-       POSTGRES_USER: drkiq
-       POSTGRES_PASSWORD: test_db_password
+     env_file:
+       - .env.db
      ports: 
        - '5432:5432'
      volumes:
