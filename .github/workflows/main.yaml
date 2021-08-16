@@ -44,5 +44,9 @@ jobs:
         run: |
           cp .env.example .env
           cp .env.db.example .env.db
+
+      - name: Log in to registry
+        run: echo "${{ secrets.WORKFLOW_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        
       - name: Run tests
         run: docker-compose run backend rails test

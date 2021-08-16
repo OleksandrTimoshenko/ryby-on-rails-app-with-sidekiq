@@ -19,12 +19,7 @@ services:
        - drkiq-redis:/var/lib/redis/data
 
  backend:
-     build:
-       context: .
-       dockerfile: /home/alex/my_files/learning_3/Teamvoy/my_projects/ryby-on-rails-app-with-sidekiq/deploy/docker/Dockerfile
-       args:
-         USER_ID: "${USER_ID:-1000}"
-         GROUP_ID: "${GROUP_ID:-1000}"
+     image: ghcr.io/oleksandrtimoshenko/ruby_on_rails
      volumes:
        - ./:/opt/app
      links:
@@ -39,12 +34,7 @@ services:
      command: ./entrypoint.sh
 
  sidekiq:
-     build:
-       context: .
-       dockerfile: /home/alex/my_files/learning_3/Teamvoy/my_projects/ryby-on-rails-app-with-sidekiq/deploy/docker/Dockerfile
-       args:
-         USER_ID: "${USER_ID:-1000}"
-         GROUP_ID: "${GROUP_ID:-1000}"
+     image: ghcr.io/oleksandrtimoshenko/ruby_on_rails
      command: bundle exec sidekiq 
      links:
        - postgres
