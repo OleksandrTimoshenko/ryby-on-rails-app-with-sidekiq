@@ -35,3 +35,13 @@ Things you may want to cover:
 * docker-compose up
 
 * make run-tests
+
+* now you can visit 127.0.0.1
+
+* vagrant setup
+
+* vagrant plugin install vagrant-env
+
+* make vagrant-provision
+
+* now you can visit 10.2.2.25
