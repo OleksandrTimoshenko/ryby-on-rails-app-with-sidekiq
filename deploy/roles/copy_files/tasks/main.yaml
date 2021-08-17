@@ -1,0 +1,36 @@
+---
+- name: Create Nginx directiry
+  file:
+    path: /opt/nginx
+    state: directory
+    mode: 0775
+
+- name: Copy .env file
+  copy:
+    src: ../{{ item }}
+    dest: /opt/
+  with_items:
+    - .env
+    - .env.db
+
+- name: Copy Nginx configs
+  copy:
+    src: ./nginx/{{ item }}
+    dest: /opt/nginx/{{ item }}
+  with_items:
+    - nginx.conf
+
+- name: Copy compose files
+  copy:
+    src: "../{{ item }}"
+    dest: "/opt/{{ item }}"
+  loop:
+    - docker-compose.yaml
+
+- name: Copy entrypoint script
+  copy:
+    src: "../{{ item }}"
+    dest: "/opt/{{ item }}"
+    mode: 755
+  loop:
+    - entrypoint.sh
