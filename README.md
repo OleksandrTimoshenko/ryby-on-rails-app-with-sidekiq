@@ -21,4 +21,17 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* cp .env.exanple .env
+* cp .env.db.exanple .env.db
+
+* set GITHUB_USER and GITHUB_TOKEN into .env file
+
+* make registry-login
+
+* make generate-token
+
+* set new tocken into SECRET_TOKEN variable in .env file
+
+* docker-compose up
+
+* make run-tests
